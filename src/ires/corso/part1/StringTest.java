@@ -22,11 +22,13 @@ public class StringTest {
             char c2 = args[1].charAt(0);
             char c3 = args[2].charAt(0);
 
-            char cl1;
+            char cl1 = args[0].charAt(args[0].length() - 1);
+            char cl2 = args[1].charAt(args[1].length() - 1);
+            char cl3 = args[2].charAt(args[2].length() - 1);
 
-            String str1 = String.format("La stringa %s, ha lunghezza %d, comincia per %c...", args[0], l1, c1);
-            String str2 = String.format("La stringa %s, ha lunghezza %d, comincia per %c...", args[1], l2, c2);
-            String str3 = String.format("La stringa %s, ha lunghezza %d, comincia per %c...", args[2], l3, c3);
+            String str1 = String.format("La stringa %s, ha lunghezza %d, comincia per %c e finisce per %c", args[0], l1, c1, cl1);
+            String str2 = String.format("La stringa %s, ha lunghezza %d, comincia per %c e finisce per %c", args[1], l2, c2, cl2);
+            String str3 = String.format("La stringa %s, ha lunghezza %d, comincia per %c e finisce per %c", args[2], l3, c3, cl3);
 
             System.out.println(str1);
             System.out.println(str2);
