@@ -24,9 +24,6 @@ public class ShapeTest {
     public static void main(String[] args){
 
         Scanner s = new Scanner(System.in);
-        Quadrato q = new Quadrato();
-        Trapezio t = new Trapezio();
-        Triangolo tria = new Triangolo();
 
         System.out.println("Scegli l'area da calcolare:");
         System.out.println("1 - Quadrato");
