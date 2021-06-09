@@ -3,6 +3,7 @@ package ires.corso.part1;
 import java.util.Scanner;
 
 public class LoopTest {
+
     public static void main(String[] args){
 
         Scanner s = new Scanner(System.in);
@@ -15,7 +16,7 @@ public class LoopTest {
 
         for(i = 1; i <= l; i++){
             for(j = 1; j <= i; j++){
-                System.out.print(n);
+                System.out.print(n + " ");
                 n++;
             }
             System.out.println();
