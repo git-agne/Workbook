@@ -35,16 +35,25 @@ public class ArrayTest {
 
     public static int[] removeDuplicates(int[] arrayDuplicates){
 
-        int[] indexArr = new int[arrayDuplicates.length];
+        int[] indexArr = new int[0];
 
         int l = 0;
 
         for(int i = 0; i < arrayDuplicates.length; i++){
             for(int j = i + 1; j < arrayDuplicates.length; j++){
                 if(arrayDuplicates[i] == arrayDuplicates[j]){
-                    l++;
+                    int[] supportArr = new int[indexArr.length];
+                    supportArr = Arrays.copyOf(indexArr, indexArr.length);
+
+                    indexArr = new int[l + 1];
+                    //Un altro for?
+                    //for(int x = 0; x < l; x++){
+                      //  indexArr[x] = supportArr[x];
+                    //}
                     indexArr[l] = i;
+                    l++;
                 }
+                //Qui fuori dall'if?
             }
         }
         int[] arrWithoutDupl = new int[arrayDuplicates.length - l];
