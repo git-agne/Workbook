@@ -1,5 +1,9 @@
 package ires.corso.part2.firstclasses;
 
+import ires.corso.part2.firstclasses.classes.Automobile;
+
+import java.util.Scanner;
+
 // Create 2 classi a vostro piacimento, ispirandovi agli oggetti che + vi piacciono.
 //
 // Includete:
@@ -17,4 +21,11 @@ package ires.corso.part2.firstclasses;
 // Fate un test creando almeno un'istanza di ciascuna classe
 
 public class FirstClassTest {
+    public static void main(String[] args){
+
+        Automobile a = new Automobile("ciao",2);
+
+
+
+    }
 }

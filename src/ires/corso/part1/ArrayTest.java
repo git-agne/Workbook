@@ -46,25 +46,28 @@ public class ArrayTest {
                     supportArr = Arrays.copyOf(indexArr, indexArr.length);
 
                     indexArr = new int[l + 1];
-                    //Un altro for?
-                    //for(int x = 0; x < l; x++){
-                      //  indexArr[x] = supportArr[x];
-                    //}
-                    indexArr[l] = i;
+
+                    for(int x = 0; x < supportArr.length; x++){
+                        indexArr[x] = supportArr[x];
+                    }
+
+                    indexArr[l] = j;
                     l++;
                 }
-                //Qui fuori dall'if?
             }
         }
         int[] arrWithoutDupl = new int[arrayDuplicates.length - l];
 
         int count = 0;
+
         //bug da risolvere: sostituire 0 nell'indexArray
         for(int m = 0; m < indexArr.length; m++){
-            for(int n = 0; n < arrayDuplicates.length; n++){
-                if(indexArr[m] != n && indexArr[m] != 0){
+             for(int n = 0; n < arrayDuplicates.length; n++){
+                if(indexArr[m] != n){
                     arrWithoutDupl[count] = arrayDuplicates[n];
                     count++;
+                } else {
+                    break;
                 }
             }
         }
