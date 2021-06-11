@@ -7,12 +7,16 @@ public class Zaino {
     private boolean isHeavy;
 
     public void prettyPrint() {
-        System.out.printf("Sono lo zaino di %s e contengo %d litri", owner, capacity);
+        if(isHeavy){
+            System.out.printf("Sono lo zaino di %s, contengo %d litri e sono pesante\n", owner, capacity);
+        }else
+            System.out.printf("Sono lo zaino di %s e contengo %d litri\n", owner, capacity);
     }
 
     public Zaino(String owner, int capacity) {
         this.owner = owner;
         this.capacity = capacity;
+        isHeavy = false;
     }
 
     public String getOwner() {

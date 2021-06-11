@@ -1,6 +1,7 @@
 package ires.corso.part2.firstclasses;
 
 import ires.corso.part2.firstclasses.classes.Automobile;
+import ires.corso.part2.firstclasses.classes.Zaino;
 
 import java.util.Scanner;
 
@@ -23,9 +24,10 @@ import java.util.Scanner;
 public class FirstClassTest {
     public static void main(String[] args){
 
-        Automobile a = new Automobile("ciao",2);
+        Automobile a = new Automobile("Ford",1000);
+        Zaino z = new Zaino("Antonio", 15);
 
-
-
+        a.prettyPrint();
+        z.prettyPrint();
     }
 }
