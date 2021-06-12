@@ -28,49 +28,47 @@ public class ArrayTest {
     }
 
     public static void printArray(int[] arr){
+
         for(int i = 0; i < arr.length; i++){
             System.out.print(arr[i] + " ");
         }
     }
 
+    public static int[] removeElement(int[] arr, int index) {
+
+        int[] newArr = new int[arr.length - 1];
+
+        for(int i = 0, j = 0; i < arr.length && j < newArr.length; i++, j++){
+            if(i != index){
+                newArr[j] = arr[i];
+            }
+            else{
+                newArr[j] = arr[i + 1];
+                i++;
+            }
+        }
+
+        return newArr;
+    }
+
     public static int[] removeDuplicates(int[] arrayDuplicates){
 
-        int[] indexArr = new int[0];
+        int[] arrWithoutDupl;
+        arrWithoutDupl = arrayDuplicates;
 
         int l = 0;
 
         for(int i = 0; i < arrayDuplicates.length; i++){
             for(int j = i + 1; j < arrayDuplicates.length; j++){
                 if(arrayDuplicates[i] == arrayDuplicates[j]){
-                    int[] supportArr = new int[indexArr.length];
-                    supportArr = Arrays.copyOf(indexArr, indexArr.length);
 
-                    indexArr = new int[l + 1];
+                    arrWithoutDupl = removeElement(arrWithoutDupl, j);
 
-                    for(int x = 0; x < supportArr.length; x++){
-                        indexArr[x] = supportArr[x];
-                    }
-
-                    indexArr[l] = j;
-                    l++;
+                    return removeDuplicates(arrWithoutDupl);
                 }
             }
         }
-        int[] arrWithoutDupl = new int[arrayDuplicates.length - l];
 
-        int count = 0;
-
-        //bug da risolvere: sostituire 0 nell'indexArray
-        for(int m = 0; m < indexArr.length; m++){
-             for(int n = 0; n < arrayDuplicates.length; n++){
-                if(indexArr[m] != n){
-                    arrWithoutDupl[count] = arrayDuplicates[n];
-                    count++;
-                } else {
-                    break;
-                }
-            }
-        }
         return arrWithoutDupl;
     }
 
