@@ -1,9 +1,7 @@
-package ires.corso.part2.firstclasses;
+package ires.corso.part2;
 
-import ires.corso.part2.firstclasses.classes.Automobile;
-import ires.corso.part2.firstclasses.classes.Zaino;
-
-import java.util.Scanner;
+import ires.corso.part2.firstclasses.Automobile;
+import ires.corso.part2.firstclasses.Zaino;
 
 // Create 2 classi a vostro piacimento, ispirandovi agli oggetti che + vi piacciono.
 //

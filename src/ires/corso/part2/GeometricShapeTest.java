@@ -1,4 +1,4 @@
-package ires.corso.part2.firstclasses;
+package ires.corso.part2;
 
 // ...dovete riscrivere in versione OOP (object oriented programming)
 // il programma che calcolava le aree di triangolo, trapezio, quadrato:
@@ -20,10 +20,10 @@ package ires.corso.part2.firstclasses;
 //    - creare un array di MasterShape che avrà come elementi le istanze create
 //    - calcolare le aree e stamparle in un unico loop (come "ilConto")
 
-import ires.corso.part2.firstclasses.classes.MasterShape;
-import ires.corso.part2.firstclasses.classes.Square;
-import ires.corso.part2.firstclasses.classes.Trapezium;
-import ires.corso.part2.firstclasses.classes.Triangle;
+import ires.corso.part2.firstclasses.MasterShape;
+import ires.corso.part2.firstclasses.Square;
+import ires.corso.part2.firstclasses.Trapezium;
+import ires.corso.part2.firstclasses.Triangle;
 
 import java.util.Scanner;
 
@@ -41,6 +41,9 @@ public class GeometricShapeTest {
 
         System.out.println("Trapezio: inserisci base minore, base maggiore e altezza: ");
         Trapezium trap = new Trapezium(scan.nextDouble(), scan.nextDouble(), scan.nextDouble());
+
+        // Inserire controlli per i dati con metodi statici, poi da passare al costruttore
+        // Dopo aver inserito i dati, controllare che le figure non siano NULLE
 
         MasterShape[] shapeArr = new MasterShape[3];
         shapeArr[0] = s;

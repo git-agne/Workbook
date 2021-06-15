@@ -1,4 +1,4 @@
-package ires.corso.part2.firstclasses.classes;
+package ires.corso.part2.firstclasses;
 
 public class Zaino {
 
