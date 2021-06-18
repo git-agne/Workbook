@@ -20,10 +20,10 @@ package ires.corso.part2;
 //    - creare un array di MasterShape che avrà come elementi le istanze create
 //    - calcolare le aree e stamparle in un unico loop (come "ilConto")
 
-import ires.corso.part2.firstclasses.MasterShape;
-import ires.corso.part2.firstclasses.Square;
-import ires.corso.part2.firstclasses.Trapezium;
-import ires.corso.part2.firstclasses.Triangle;
+import ires.corso.part2.firstclasses.geometric2.MasterShape;
+import ires.corso.part2.firstclasses.geometric2.Square;
+import ires.corso.part2.firstclasses.geometric2.Trapezium;
+import ires.corso.part2.firstclasses.geometric2.Triangle;
 
 import java.util.Scanner;
 

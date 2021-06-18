@@ -1,4 +1,6 @@
-package ires.corso.part2.firstclasses;
+package ires.corso.part2.firstclasses.geometric2;
+
+import ires.corso.part2.firstclasses.geometric2.MasterShape;
 
 public class Trapezium extends MasterShape {
 

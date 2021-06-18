@@ -1,4 +1,4 @@
-package ires.corso.part2.firstclasses;
+package ires.corso.part2.firstclasses.geometric2;
 
 public class MasterShape {
 
