@@ -1,8 +1,6 @@
 package ires.corso.part2;
 
-import ires.corso.part2.firstclasses.Eroe;
-import ires.corso.part2.firstclasses.Licantropo;
-import ires.corso.part2.firstclasses.Vampiro;
+import ires.corso.part2.firstclasses.*;
 import ires.corso.part2.interfaces.Personaggio;
 
 public class InterfacesTest {
