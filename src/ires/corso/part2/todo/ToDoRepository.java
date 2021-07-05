@@ -13,49 +13,26 @@ public class ToDoRepository implements Serializable
     // - metodi per individuare, aggiungere, eliminare un TO-DO
     // - restituisce una copia di tutti i TO-DO come ArrayList, da usare per le visualizzazioni
 
-    private static String fileName = "to-doList.txt";
-
+    private long idSeed;
     Map<Long, ToDo> _data = new HashMap<>();
 
-    // Serializzazione con la funzione writeObject()
-    // Chiamando writeObject() serializza l'oggetto non appena il metodo viene chiamato
     private static ToDoRepository _repository = null;
 
     public static void writeToFile() throws IOException {
-        try {
-            FileOutputStream file = new FileOutputStream(fileName);
-            ObjectOutputStream out = new ObjectOutputStream(file);
-
-            // new ToDoImportExport
-            // _repository = al metodo toDoRepository(_repository) di import/export
-            out.writeObject(_repository);
-
-            out.close();
-            file.close();
-        }
-        catch(IOException e) {
-            System.out.println("IOException is caught");
-        }
+        ToDoImportExport.exportToFile(_repository);
     }
 
-    public static ToDoRepository loadFromFile() throws IOException {
-        // Individua il file e lo deserializza con readObject
-        // _repository = ...
+    public static void loadFromFile() throws IOException {
+       _repository = ToDoImportExport.importFromFile();
+    }
 
-        try {
-            FileInputStream file = new FileInputStream(fileName);
-            ObjectInputStream in = new ObjectInputStream(file);
+    public long getNewId() {
+        idSeed ++;
+        return idSeed;
+    }
 
-            _repository = (ToDoRepository) in.readObject();
-
-            in.close();
-            file.close();
-        }
-        catch(IOException | ClassNotFoundException e) {
-            System.out.printf(e + " is caught");
-        }
-
-        return _repository;
+    public ToDo getToDoByID(int id) {
+        return _data.get(id);
     }
 
     public void delete(Long ID) {
@@ -63,16 +40,11 @@ public class ToDoRepository implements Serializable
     }
 
     public void add(ToDo t) {
-        // Si deve entrare nell'oggetto t e leggere il suo ID
-        // per poi salvarlo nella mappa correttamente (con put(ID, t))
+        t.setId(getNewId());
         _data.put(t.getId(), t);
     }
 
     public void update(ToDo t) {
-        // Si prende ID dall'oggetto t
-        // Si recupera dalla mappa il TO-DO corrispondente con get(t), per controllo
-        // Si sostituisce con put(ID, t)
-
         Set<Long> sl = _data.keySet();
         Iterator<Long> longIter = sl.iterator();
 
@@ -84,17 +56,28 @@ public class ToDoRepository implements Serializable
                 System.out.println("Il To-Do non esiste.");
             }
         }
+
+        // 1. t è una copia di un To-Do, contiene tutte le modifiche fatte campo per campo
+        // t sovrascrive la sua versione precedente nella collection con add()
+        // 2. si prende Id di t e si verifica se esiste un To-Do corrispondente
+        // con remove/put si sostituisce t alla sua versione precedente
     }
 
     public List<ToDo> getToDoList() {
-        // Restituisce lista di tutti i TO-DO esistenti
+        ArrayList<ToDo> todoList = new ArrayList<>();
 
-        ArrayList<ToDo> todoList = new ArrayList<>(_data.values());
+        for(ToDo t: _data.values()) {
+            todoList.add(t);
+        }
         return todoList;
     }
 
+    private ToDoRepository() {}
+
     public static ToDoRepository getToDoRepository() {
+        if(_repository == null) {
+            _repository = new ToDoRepository();
+        }
         return _repository;
     }
-
 }

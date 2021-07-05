@@ -3,50 +3,45 @@ package ires.corso.part2.todo;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ToDo implements Serializable, Comparable<ToDo>
+public class ToDo implements Serializable
 {
     // id, titolo, descrizione, data di inserimento, data di consegna, priorità, stato
 
-    private enum priority {
+    public enum Priority {
         ALTA,
         MEDIA,
         BASSA
     }
-    private enum state {
+    public enum State {
         DA_FARE,
         COMPLETATA,
         ANNULLATA,
         IN_ESECUZIONE
     }
 
-    private static Long idIncr = 0l;
-
-    protected final Long id;
+    protected Long id;
     private String title;
     private String description;
     protected LocalDate insertionDate;
     private LocalDate deliveryDate;
+    private Priority priority;
+    private State state;
 
     public ToDo cloneForUpdate() {
-        // Fabbrica una copia esatta del TO-DO
-
-        ToDo newToDo = new ToDo(this.id, this.title, this.description, this.insertionDate, this.deliveryDate);
+        ToDo newToDo = new ToDo(this.title, this.description, this.insertionDate, this.deliveryDate, this.priority, this.state);
         return newToDo;
     }
 
-    protected long getNewId() {
-        idIncr = ++idIncr;
-        return ++idIncr;
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
-    @Override
-    public int compareTo(ToDo o) {
-        if(this.getDeliveryDate().toString() == o.getDeliveryDate().toString()) {
-            return 0;
-        }
-        else {
-            return -1;
-        }
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setTitle(String title) {
@@ -59,6 +54,14 @@ public class ToDo implements Serializable, Comparable<ToDo>
 
     public void setDeliveryDate(LocalDate deliveryDate) {
         this.deliveryDate = deliveryDate;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public State getState() {
+        return state;
     }
 
     public Long getId() {
@@ -81,21 +84,21 @@ public class ToDo implements Serializable, Comparable<ToDo>
         return deliveryDate;
     }
 
-    public ToDo(String title, String description, LocalDate insertionDate, LocalDate deliveryDate) {
-        this.id = getNewId();
+    public ToDo(String title, String description, LocalDate insertionDate, LocalDate deliveryDate, Priority prio) {
         this.title = title;
         this.description = description;
         this.insertionDate = insertionDate;
         this.deliveryDate = deliveryDate;
+        this.priority = prio;
+        this.state = State.DA_FARE;
     }
 
-    public ToDo(Long id, String title, String description, LocalDate insertionDate, LocalDate deliveryDate) {
-        this.id = id;
+    public ToDo(String title, String description, LocalDate insertionDate, LocalDate deliveryDate, Priority prio, State state) {
         this.title = title;
         this.description = description;
         this.insertionDate = insertionDate;
         this.deliveryDate = deliveryDate;
+        this.priority = prio;
+        this.state = state;
     }
-
-
 }
