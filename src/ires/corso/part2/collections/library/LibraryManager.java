@@ -1,10 +1,7 @@
 package ires.corso.part2.collections.library;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LibraryManager {
     public static void main(String[] args) {
@@ -49,6 +46,16 @@ public class LibraryManager {
         b2.addCategory(cat2);
         b3.addCategory(cat3);
 
+        Iterator<Book> iBook = listUs3.iterator();
+        while(iBook.hasNext()) {
+            System.out.printf("Titolo: %s\n", iBook.next().getTitle());
+        }
+
+        for(Category c: b1.bookCategory) {
+            System.out.println(c.getTitle());
+        }
+
+        /*
         for(Loan l: User.getLoanById(123)) {
             for(Book b: l.borrowedBooks) {
                 System.out.println("Libri presi in prestito: " + b.getTitle());
@@ -58,5 +65,7 @@ public class LibraryManager {
         for(Category c: Book.getCategoryByBook(b3)) {
             System.out.println("Categoria: " + c.getTitle());
         }
+
+         */
     }
 }

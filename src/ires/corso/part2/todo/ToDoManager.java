@@ -6,14 +6,10 @@ import java.util.Scanner;
 
 public class ToDoManager
 {
-    // Classe responsabile per le operazioni sull'insieme dei TO-DO
-    // - metodi creazione nuovo TO-DO
-    // - metodi per modifica, rimozione
-    // - gestisce input utente (cioè loop di richiesta di quali campi devono essere modificati)
-    // ha al suo interno funzioni di controllo sull'input utente
-
     static Scanner scan = new Scanner(System.in);
-    ToDoRepository td = ToDoRepository.getToDoRepository();
+
+    public ToDoManager() {
+    }
 
     public static void createNewToDo() {
         ToDo newToDo;
@@ -53,9 +49,10 @@ public class ToDoManager
 
     public static void updateToDo() {
         System.out.println("Inserisci l'ID che vuoi modificare: ");
-        int id = Integer.parseInt(scan.nextLine());
+        Long id = Long.parseLong(scan.nextLine());
 
         ToDo cloneToDo = ToDoRepository.getToDoRepository().getToDoByID(id).cloneForUpdate();
+        cloneToDo.setId(id);
         LocalDate oldDate = cloneToDo.getDeliveryDate();
 
         System.out.println("Modifica titolo: ");
@@ -113,6 +110,8 @@ public class ToDoManager
             case "3":
                 cloneToDo.setPriority(ToDo.Priority.BASSA);
                 break;
+            default:
+                break;
         }
 
         System.out.println("Modifica stato: ");
@@ -135,14 +134,17 @@ public class ToDoManager
                 cloneToDo.setState(ToDo.State.IN_ESECUZIONE);
                 break;
         }
-        //MANCA UPDATE DI REPOSITORY - NON VIENE AGGIORNATO IL TO-DO NEL REPOSITORY
-        //td.update(cloneToDo);
+        ToDoRepository.getToDoRepository().update(cloneToDo);
     }
 
     public static void removeToDo() {
         System.out.println("Inserisci l'ID che vuoi eliminare: ");
-        int id = Integer.parseInt(scan.nextLine());
-
-        ToDoRepository.getToDoRepository()._data.remove(id);
+        Long id = Long.parseLong(scan.nextLine());
+        if(ToDoRepository.getToDoRepository()._data.containsKey(id)) {
+            ToDoRepository.getToDoRepository().delete(id);
+        }
+        else {
+            System.out.println("ID non valido.");
+        }
     }
 }

@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoMain {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
 
         ToDoApplication.doMenu();
+
     }
 
 }

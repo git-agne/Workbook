@@ -5,8 +5,6 @@ import java.time.LocalDate;
 
 public class ToDo implements Serializable
 {
-    // id, titolo, descrizione, data di inserimento, data di consegna, priorità, stato
-
     public enum Priority {
         ALTA,
         MEDIA,
@@ -94,6 +92,16 @@ public class ToDo implements Serializable
     }
 
     public ToDo(String title, String description, LocalDate insertionDate, LocalDate deliveryDate, Priority prio, State state) {
+        this.title = title;
+        this.description = description;
+        this.insertionDate = insertionDate;
+        this.deliveryDate = deliveryDate;
+        this.priority = prio;
+        this.state = state;
+    }
+
+    public ToDo(Long id, String title, String description, LocalDate insertionDate, LocalDate deliveryDate, Priority prio, State state) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.insertionDate = insertionDate;

@@ -1,6 +1,7 @@
 package ires.corso.part3;
 
 import java.util.*;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LambdaTest {
@@ -40,14 +41,15 @@ public class LambdaTest {
         System.out.println("\nInserisci lista di numeri separati da virgola: ");
         String input = scan.nextLine();
         String[] strings = input.split(",");
-        List<Double> listInt = new ArrayList<>();
+        List<Integer> listInt = new ArrayList<>();
         for(String s: strings) {
-            Double i = Double.parseDouble(s);
+            Integer i = Integer.parseInt(s);
             listInt.add(i);
         }
 
-        listInt.stream().distinct().map(i -> i * i).forEach(i -> System.out.println(i));
-        // Perchè non funziona average()
+        System.out.println("Media: " + listInt.stream().mapToInt(Integer::intValue).distinct().map(i -> i * i).average().toString());
+        //forEach(i -> System.out.println(i));
+        // Perchè non funziona average() - funzione di IntegerStream
     }
 }
 

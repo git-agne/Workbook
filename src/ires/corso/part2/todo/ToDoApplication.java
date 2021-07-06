@@ -5,18 +5,16 @@ import java.util.Scanner;
 
 public class ToDoApplication
 {
-    // 1. Deserializza il repository da file (carica i dati dell'ultimo salvataggio) -> invoca metodo ToDoRepository
-    //    creando una classe Repository
-    // 2. Gestione del menu principale con un loop e due switch
-    // 3. In corrispondenza di una scelta dell'utente (ramo dello switch) chiama le classi
-    //    necessarie per svolgere l'azione
-    // 4. Chiede conferma e serializza in uscita
-    // 5. Fornisce anche i metodi della classe "lettore" di quiz... askForInput(), display()
+    public static ToDoList tdl;
+    static {
+        try {
+            tdl = new ToDoList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public static ToDoList tdl = new ToDoList();
-    public ToDoRepository tdr = ToDoRepository.getToDoRepository();
-
-    public static void doMenu() throws IOException {
+    public static void doMenu() throws Exception {
         while(true) {
             display("--------------------------------");
             display("________** TO-DO LIST **________");
@@ -48,7 +46,7 @@ public class ToDoApplication
                             tdl.viewByStatus();
                             break;
                         default:
-                            display("Inserisci un valore corretto.");
+                            display("Inserisci un carattere valido.");
                             break;
                     }
                     break;
@@ -77,10 +75,10 @@ public class ToDoApplication
                     userInput = askForInput();
                     switch(userInput) {
                         case "1":
-                            ToDoRepository.loadFromFile();
+                            ToDoImportExport.importFromFile();
                             break;
                         case "2":
-                            ToDoRepository.writeToFile();
+                            ToDoImportExport.exportToFile();
                             break;
                     }
                     break;
