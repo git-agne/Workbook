@@ -132,7 +132,7 @@ public class Library implements Serializable
         if(library == null) {
             library = new Library();
         }
-        // Inizializzazione file con serializzazione con in repository
+
         if(!Paths.get(fileName).toFile().exists()){
             writeToFile();
             loadFromFile();
