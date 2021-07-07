@@ -1,8 +1,9 @@
 package ires.corso.test;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Book
+public class Book implements Serializable
 {
     public enum BookKind {
         FANTASY,
@@ -18,13 +19,14 @@ public class Book
         CINQUE
     }
      */
-    protected Integer id;
+    protected Long id;
     private String title;
     private String author;
     private String description;
     private String isbn;
     private LocalDate publicationDate;
     private int personalJudgment;
+    private int readingAdvancement;
     private BookKind kind;
 
     public Book cloneBook() {
@@ -40,12 +42,20 @@ public class Book
         this.kind = kind;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getReadingAdvancement() {
+        return readingAdvancement;
+    }
+
+    public void setReadingAdvancement(int readingAdvancement) {
+        this.readingAdvancement = readingAdvancement;
     }
 
     public String getTitle() {
@@ -102,5 +112,8 @@ public class Book
         this.isbn = isbn;
         this.publicationDate = publicationDate;
         this.kind = kind;
+
+        personalJudgment = 0;
+        readingAdvancement = 0;
     }
 }

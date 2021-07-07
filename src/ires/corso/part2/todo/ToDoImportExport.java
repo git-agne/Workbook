@@ -115,7 +115,7 @@ public class ToDoImportExport
                 String tdString = convertToString(tdIter.next());
                 output.println(tdString);
             }
+            System.out.println("Lista esportata.");
         }
-        System.out.println("Lista esportata.");
     }
 }

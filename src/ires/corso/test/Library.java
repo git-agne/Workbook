@@ -1,22 +1,57 @@
 package ires.corso.test;
 
+import java.io.*;
+import java.nio.file.Paths;
 import java.util.*;
 
-public class Library
+public class Library implements Serializable
 {
-    private Integer id;
-    private Map<Integer, Book> bookMap = new HashMap<>();
-    public static Library library = null;
+    private long idSeed;
+    Map<Long, Book> bookMap = new HashMap<>();
 
-    public int getId() {
-        ++id;
-        return id;
+    public static Library library = null;
+    private static String fileName = "library.ser";
+
+    public long getNewId() {
+        idSeed++;
+        return idSeed;
+    }
+
+    public static void writeToFile() {
+        try {
+            FileOutputStream file = new FileOutputStream(fileName);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+
+            out.writeObject(library);
+
+            out.close();
+            file.close();
+        }
+        catch(IOException e) {
+            System.out.println(e + " is Caught.");
+        }
+    }
+
+    public static void loadFromFile() {
+        try {
+            FileInputStream file = new FileInputStream(fileName);
+            ObjectInputStream in = new ObjectInputStream(file);
+
+            library = (Library) in.readObject();
+
+            in.close();
+            file.close();
+        }
+        catch(IOException | ClassNotFoundException e) {
+            System.out.printf(e + " is caught.");
+        }
     }
 
     public void addBook(Book b) {
-        b.setId(getId());
+        b.setId(getNewId());
         bookMap.put(b.getId(), b);
-        // Serializza
+
+        writeToFile();
     }
 
     public void removeBook(Integer id) {
@@ -26,17 +61,19 @@ public class Library
         else {
             Application.display("ID non valido.");
         }
-        // Serializza
+
+        writeToFile();
     }
 
     public void updateBook(Book b) {
-        Set<Integer> idSet = bookMap.keySet();
-        Iterator<Integer> idIter = idSet.iterator();
+        Set<Long> idSet = bookMap.keySet();
+        Iterator<Long> idIter = idSet.iterator();
 
         while(idIter.hasNext()) {
             if(idIter.next().intValue() == b.getId()) {
                 bookMap.put(b.getId(), b);
-                // Serializza
+
+                writeToFile();
                 System.out.println("Modifica apportata.");
             }
             else {
@@ -45,8 +82,41 @@ public class Library
         }
     }
 
-    public Book getBookByID(Integer id) {
-        return bookMap.get(id);
+    public void updateAdvancement(Long id, int advancement) {
+        if(bookMap.containsKey(id)) {
+            if(bookMap.get(id).getReadingAdvancement() < 100) {
+                bookMap.get(id).setReadingAdvancement(advancement);
+
+                writeToFile();
+            }
+            else if(bookMap.get(id).getReadingAdvancement() >= 100) {
+                System.out.println("Lettura completata, impossibile modificare l'avanzamento.");
+            }
+        }
+        else {
+            System.out.println("ID non valido.");
+        }
+    }
+
+    public void updateJudgment(Long id, int judgment) {
+        if(bookMap.containsKey(id)) {
+            bookMap.get(id).setPersonalJudgment(judgment);
+
+            writeToFile();
+        }
+        else {
+            System.out.println("ID non valido.");
+        }
+    }
+
+    public Book getBookByID(Long id) {
+        if(bookMap.containsKey(id)) {
+            return bookMap.get(id);
+        }
+        else {
+            System.out.println("ID non valido.");
+            return null;
+        }
     }
 
     public ArrayList<Book> getBookList() {
@@ -63,6 +133,12 @@ public class Library
             library = new Library();
         }
         // Inizializzazione file con serializzazione con in repository
+        if(!Paths.get(fileName).toFile().exists()){
+            writeToFile();
+            loadFromFile();
+        } else {
+            loadFromFile();
+        }
         return library;
     }
 

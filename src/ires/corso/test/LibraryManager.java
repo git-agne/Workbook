@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 public class LibraryManager
 {
-    //public static Scanner scan = new Scanner(System.in);
-
     public static void insertNewBook() {
         Book newBook;
 
@@ -48,9 +46,9 @@ public class LibraryManager
         Library.getLibrary().addBook(newBook);
     }
 
-    public void updateBook() {
+    public static void updateBook() {
         Application.display("Inserisci l'ID del libro che vuoi modificare: ");
-        Integer idInput = Integer.parseInt(Application.getInput());
+        Long idInput = Long.parseLong(Application.getInput());
 
         Book bookClone = Library.getLibrary().getBookByID(idInput).cloneBook();
         bookClone.setId(idInput);
@@ -129,10 +127,30 @@ public class LibraryManager
         Library.getLibrary().updateBook(bookClone);
     }
 
-    public void deleteBook() {
+    public static void deleteBook() {
         Application.display("Inserisci l'ID del libro da eliminare:");
         int idInput = Integer.parseInt(Application.getInput());
 
         Library.getLibrary().removeBook(idInput);
+    }
+
+    public static void updateReadingAdvancement() {
+        Application.display("Inserisci l'ID del libro di cui vuoi aggiornare l'avanzamento:");
+        Long idInput = Long.parseLong(Application.getInput());
+
+        Application.display("Inserisci un numero da 1 a 100 che rappresenta la percentuale già letta del volume: ");
+        int advancement = Integer.parseInt(Application.getInput());
+
+        Library.getLibrary().updateAdvancement(idInput, advancement);
+    }
+
+    public static void updateJudgment() {
+        Application.display("Inserisci l'ID del libro di cui vuoi aggiornare l'avanzamento:");
+        Long idInput = Long.parseLong(Application.getInput());
+
+        Application.display("Inserisci un voto da 1 a 5: ");
+        int judgment = Integer.parseInt(Application.getInput());
+
+        Library.getLibrary().updateJudgment(idInput, judgment);
     }
 }
